@@ -8,9 +8,17 @@ type Props = {
 const Page = ({ setSong }: Props) => {
 	const [search, setSearch] = useState('');
 	const getOneSong = async () => {
-			const json = await api.getOne(search);
-			console.log(json)
-			setSong(json);
+			try {
+				const json = await api.getOne(search);
+				if (!json.data.error) {
+					setSong([json.data]);//Tem que estar em array
+				} else {
+					setSong([]);//Se tiver erro retorno um array vazio para apagar a letra que estava la
+					alert('Letra nao encontrada!');
+				}
+			} catch(error) {
+				alert('Deu erro: '+error);
+			}
 		}
 
 	const handleKeyUp = (e: KeyboardEvent) => {

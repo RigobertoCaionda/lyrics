@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { Song } from '../../types/Song';
 const Page = () => {
 	const [song, setSong] = useState<Song[]>([]);//Array das musicas achadas
-
 	return (
 			<HomeArea>
 				<SearchInput setSong={setSong}/>

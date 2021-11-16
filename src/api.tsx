@@ -10,6 +10,48 @@ const obj = {
 		const res = await fetch(BASE+`/lyric/${search}`);
 		const json = await res.json();
 		return json;
+	},
+	insertLyric: async (title: string, body: string, singer: string) => {
+		let corpo = {
+			title,
+			body,
+			singer
+		};
+		const res = await fetch(BASE+'/add', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(corpo)
+		});
+		const json = await res.json();
+		return json;
+	},
+	update: async (id: number, title: string, body: string, singer: string) => {
+		let corpo = {
+			id,
+			title,
+			body,
+			singer
+		};
+		const res = await fetch(BASE+'/update', {
+			method: 'PUT',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(corpo)
+		});
+		const json = await res.json();
+		return json;
+	},
+	remove: async (id: number) => {
+		const res = await fetch(BASE+`/delete/${id}`, {
+			method: 'delete'
+		});
+		const json = await res.json();
+		return json;
 	}
 }
 export default obj;
