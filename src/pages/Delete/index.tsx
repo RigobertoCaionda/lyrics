@@ -1,4 +1,3 @@
-import { Container } from './styled';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react'; 
 import api from '../../api';
@@ -12,9 +11,7 @@ const Page = () => {
 		}
 		remove();
 	},[]);
-	return (
-			<></>
-		);
+	return null;
 }
 
 export default Page;
