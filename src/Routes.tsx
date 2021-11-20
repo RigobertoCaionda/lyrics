@@ -9,10 +9,27 @@ const Page = () => {
 	return (
 			<Routes>
 				<Route  path="/" element={<Home />} />
-				<Route path="/add_lyric" element={<AddLyric />} />
-				<PrivateRoute path="/lyrics-list" element={<AllLyrics />} />
-				<Route path="/edit/:title" element={<Edit />} />
-				<Route path="/delete/:id" element={<Delete />} />
+				<Route path="/add_lyric" element={
+					<PrivateRoute>
+						<AddLyric />
+					</PrivateRoute>
+				} />
+				<Route path="/lyrics-list" element={
+					<PrivateRoute>
+						<AllLyrics />
+					</PrivateRoute>
+				} />
+				<Route path="/edit/:title" element={
+					<PrivateRoute>
+						<Edit />
+					</PrivateRoute>
+				} />
+				<Route path="/delete/:id" element={
+					<PrivateRoute>
+						<Delete />
+					</PrivateRoute>
+				} />
+				<Route path="*" element={<div>Pagina nao encontrada!</div>} />
 			</Routes>
 		);
 }

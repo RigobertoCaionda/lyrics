@@ -3,6 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';//No react-router-dom v6 useHistory e useNavigate
 import { Song } from '../../types/Song';
 import api from '../../api';
+import { ErrorMessage } from '../../app.styled';
 const Page = () => {
 	let navigate = useNavigate();//Em vez de useHistory agora e useNavigate
 	const [lyric, setLyric] = useState<Song[]>([]);
@@ -11,6 +12,7 @@ const Page = () => {
 	const [body, setBody] = useState('');
 	const [singer, setSinger] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState('');
 
 	let { title } = useParams();
 	useEffect(()=>{
@@ -35,8 +37,9 @@ const Page = () => {
 		const json = await api.update(id, songTitle, body, singer);
 		if (!json.data.error) {
 			navigate('/lyrics-list');//E assim que funciona o navigate da versao 6 do react-router-dom
+			setError('');
 		} else {
-			alert('Item nao alterado!');
+			setError('Falha na atualização!');
 		}
 
 	}
@@ -44,6 +47,9 @@ const Page = () => {
 			<Container>
 				<h2>Pagina de edicao</h2>
 					<form onSubmit={handleFormSubmit}>
+					{error !== '' &&
+						<ErrorMessage style={{width: '100%'}}>{error}</ErrorMessage>
+					}
 						<input type="text" disabled={true} value={id}/>
 						<input type="text" value={songTitle} 
 							onChange={e=>setSongTitle(e.target.value)} disabled={loading} />
