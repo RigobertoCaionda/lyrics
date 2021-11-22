@@ -11,14 +11,22 @@ export const AddLyricArea = styled.div`
 		margin-bottom: 12px;
 		padding: 5px;
 		outline: 0;
+		font-size: 1rem;
+	}
+	textarea {
+		height: 250px;
 	}
 	button {
 		outline: 0;
-		padding: 5px 15px;
+		padding: 10px 70px;
 		cursor: pointer;
+		border: 0;
+		font-size: 1rem;
+		border-radius: 5px;
+		background-color: #000;
+		color: #fff;
 	}
-	a {
-		text-decoration: none;
-		margin-top: 20px;
+	button: hover {
+		background-color: rgba(0,0,0,.9);
 	}
 `;

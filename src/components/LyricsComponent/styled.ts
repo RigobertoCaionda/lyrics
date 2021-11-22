@@ -6,9 +6,10 @@ export const Container = styled.div`
 	h2 {
 		text-align: center;
 	}
-	p {
-		margin-top: 20px;
-		line-height: 40px;
+	pre {
+		margin-top: 10px;
+		line-height: 28px;
 		font-weight: 100;
+		text-align: center;
 	}
 `;

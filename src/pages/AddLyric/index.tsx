@@ -34,8 +34,6 @@ const Page = () => {
 				<input type="text" placeholder="Quem canta a musica?" value={singer} 
 					onChange={e=>setSinger(e.target.value)}/>
 				<button onClick={handleClick}>Enviar</button>
-
-				<Link to="/lyrics-list">Ver todas as letras</Link>
 			</AddLyricArea>
 		);
 }

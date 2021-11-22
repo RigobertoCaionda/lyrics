@@ -12,6 +12,9 @@ export const HeaderArea = styled.header`
 		text-decoration: none;
 		margin-right: 10px;
 	}
+	a: hover {
+		color: red;
+	}
 	.logoArea {
 		color: #fff;
 		font-size: 1.4rem;

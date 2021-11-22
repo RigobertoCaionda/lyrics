@@ -7,8 +7,11 @@ type Props = {
 const Page = ({item}: Props) => {
 	return (
 			<Container className="lyric">
-				{item.singer} - {item.title} <Link to={`/edit/${item.title}`}>Editar</Link>
-					<Link to={`/delete/${item.id}`}>Excluir</Link>
+				<div className="lyric-desc">{item.singer} - {item.title}</div>
+					<div className="lyric-links">
+						<Link to={`/edit/${item.title}`}>Editar</Link>
+						<Link to={`/delete/${item.id}`}>Excluir</Link>
+					</div>
 			</Container>
 		);
 }

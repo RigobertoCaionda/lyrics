@@ -8,7 +8,10 @@ const Page = () => {
 				<div className="menuArea">
 					<Link to="/">Home</Link>
 					{logged &&
-						<Link to="/add_lyric">Adicionar letra</Link>
+						<Link to="/add_lyric">Add letra</Link>
+					}
+					{logged &&
+						<Link to="/lyrics-list">Ver todas</Link>
 					}
 					<Link to="/login">Login</Link>
 				</div>

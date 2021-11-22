@@ -4,6 +4,7 @@ import AddLyric from './pages/AddLyric';
 import AllLyrics from './pages/AllLyrics';
 import Edit from './pages/Edit';
 import Delete from './pages/Delete';
+import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 const Page = () => {
 	return (
@@ -29,7 +30,7 @@ const Page = () => {
 						<Delete />
 					</PrivateRoute>
 				} />
-				<Route path="*" element={<div>Pagina nao encontrada!</div>} />
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		);
 }

@@ -7,7 +7,7 @@ const Page = ({item}: Props) => {
 	return (
 			<Container>
 				<h2>{item.title} - {item.singer}</h2>
-				<p>{item.body}</p>
+				<pre>{item.body}</pre>
 			</Container>
 		);
 }
