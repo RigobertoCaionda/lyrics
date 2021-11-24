@@ -22,6 +22,7 @@ const Page = () => {
 		 	 setLyric([json.data]);
 		 }
 		 editLyric();
+		 // eslint-disable-next-line
 	},[]);
 
 	useEffect(()=>{
@@ -31,6 +32,7 @@ const Page = () => {
 			setBody(lyric[0].body);
 			setSinger(lyric[0].singer);
 		}
+		// eslint-disable-next-line
 	},[lyric.length]);//Passo inteligente para nao dar erro ao colocar essas props do if, uma vez que elas ainda nao existirao
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

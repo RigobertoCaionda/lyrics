@@ -8,12 +8,20 @@ const Page = () => {
 				<div className="menuArea">
 					<Link to="/">Home</Link>
 					{logged &&
-						<Link to="/add_lyric">Add letra</Link>
+						<Link to="/add_lyric">Novo</Link>
 					}
 					{logged &&
-						<Link to="/lyrics-list">Ver todas</Link>
+						<Link to="/lyrics-list">Todas</Link>
 					}
-					<Link to="/login">Login</Link>
+					{!logged &&
+						<Link to="/signin">Login</Link>
+					}
+					{!logged &&
+						<Link to="/signup">Cadastrar</Link>
+					}
+					{logged &&
+						<Link to="/my-account">Minha Conta</Link>
+					}
 				</div>
 			</HeaderArea>
 		);

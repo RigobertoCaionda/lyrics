@@ -11,19 +11,13 @@ const obj = {
 		const json = await res.json();
 		return json;
 	},
-	insertLyric: async (title: string, body: string, singer: string) => {
-		let corpo = {
-			title,
-			body,
-			singer
-		};
+	insertLyric: async (fData: FormData) => {//Recebemos um formData quando vamos enviar arquivos
 		const res = await fetch(BASE+'/add', {
 			method: 'POST',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
+				//Quando vou enviar imagens, o headers fica mesmo assim vazio
 			},
-			body: JSON.stringify(corpo)
+			body: fData
 		});
 		const json = await res.json();
 		return json;

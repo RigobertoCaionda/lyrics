@@ -16,6 +16,7 @@ const Page = () => {
 		} else {
 			navigate('/lyrics-list');
 		}
+		// eslint-disable-next-line
 	},[]);
 
 	return null;

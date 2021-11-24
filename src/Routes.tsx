@@ -5,11 +5,16 @@ import AllLyrics from './pages/AllLyrics';
 import Edit from './pages/Edit';
 import Delete from './pages/Delete';
 import NotFound from './pages/NotFound';
+import MyAccount from './pages/MyAccount';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 const Page = () => {
 	return (
 			<Routes>
 				<Route  path="/" element={<Home />} />
+				<Route path="/signin" element={<SignIn />} />
+				<Route path="/signup" element={<SignUp />} />
 				<Route path="/add_lyric" element={
 					<PrivateRoute>
 						<AddLyric />
@@ -23,6 +28,11 @@ const Page = () => {
 				<Route path="/edit/:title" element={
 					<PrivateRoute>
 						<Edit />
+					</PrivateRoute>
+				} />
+				<Route path="/my-account" element={
+					<PrivateRoute>
+						<MyAccount />
 					</PrivateRoute>
 				} />
 				<Route path="/delete/:id" element={
