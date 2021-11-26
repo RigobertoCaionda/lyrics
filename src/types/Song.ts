@@ -3,4 +3,5 @@ export type Song = {
 	title: string;
 	body: string;
 	singer: string;
+	image: string;
 };

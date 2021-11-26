@@ -9,7 +9,9 @@ const Page = () => {
 	useEffect(()=>{
 		const getList = async () => {
 			const json = await api.all();
-			setList(json.list);//OBS: Nunca retorne so o json, retorne o json.AtributoLaNoBackend
+			if (!json.data.error) {
+				setList(json.list);//OBS: Nunca retorne so o json, retorne o json.AtributoLaNoBackend
+			}
 		}
 		getList();
 	},[]);

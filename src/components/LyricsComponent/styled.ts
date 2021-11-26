@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
 	margin-top: 40px;
 	width: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	img {
+		margin-bottom: 10px;
+		border-radius: 50%;
+	}
 	h2 {
 		text-align: center;
 	}

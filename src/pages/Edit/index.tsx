@@ -34,6 +34,7 @@ const Page = () => {
 		}
 		// eslint-disable-next-line
 	},[lyric.length]);//Passo inteligente para nao dar erro ao colocar essas props do if, uma vez que elas ainda nao existirao
+
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const json = await api.update(id, songTitle, body, singer);
@@ -45,9 +46,10 @@ const Page = () => {
 		}
 
 	}
+
 	return (
 			<Container>
-				<h2>Pagina de edicao</h2>
+				<h2>Pagina de edição</h2>
 					<form onSubmit={handleFormSubmit}>
 					{error !== '' &&
 						<ErrorMessage style={{width: '100%'}}>{error}</ErrorMessage>

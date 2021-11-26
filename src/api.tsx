@@ -22,6 +22,29 @@ const obj = {
 		const json = await res.json();
 		return json;
 	},
+	register: async (name: string, lastName: string, email: string, password: string, 
+		confirmPassword: string, accessLevel: string) => {
+			let corpo = {
+				name,
+				lastName,
+				email,
+				password,
+				confirmPassword,
+				accessLevel
+			};
+
+			const res = await fetch(BASE+'/register', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(corpo)
+			});
+			const json = await res.json();
+			return json;
+	},
+
 	update: async (id: number, title: string, body: string, singer: string) => {
 		let corpo = {
 			id,
