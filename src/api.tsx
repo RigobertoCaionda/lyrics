@@ -1,8 +1,16 @@
+import Cookies from 'js-cookie';
+
 let BASE = 'http://localhost:3001';
 
+let token: string = Cookies.get('token') as string;
 const obj = {
 	all: async () => {
-		const res = await fetch(BASE+'/lyrics');
+		const res = await fetch(BASE+'/lyrics', {
+			method: 'GET',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
 		const json = await res.json();
 		return json;
 	},
@@ -15,7 +23,7 @@ const obj = {
 		const res = await fetch(BASE+'/add', {
 			method: 'POST',
 			headers: {
-				//Quando vou enviar imagens, o headers fica mesmo assim vazio
+				'Authorization': `Bearer ${token}`
 			},
 			body: fData
 		});
@@ -44,7 +52,22 @@ const obj = {
 			const json = await res.json();
 			return json;
 	},
-
+	login: async (email: string, password: string) => {
+		let corpo = {
+			email,
+			password
+		};
+		const res = await fetch(BASE+'/login', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(corpo)
+		});
+		const json = await res.json();
+		return json;
+	},
 	update: async (id: number, title: string, body: string, singer: string) => {
 		let corpo = {
 			id,
@@ -56,7 +79,8 @@ const obj = {
 			method: 'PUT',
 			headers: {
 				'Accept': 'application/json',
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
 			},
 			body: JSON.stringify(corpo)
 		});
@@ -65,7 +89,10 @@ const obj = {
 	},
 	remove: async (id: number) => {
 		const res = await fetch(BASE+`/delete/${id}`, {
-			method: 'delete'
+			method: 'delete',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
 		});
 		const json = await res.json();
 		return json;

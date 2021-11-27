@@ -24,7 +24,7 @@ const Page = () => {
 		if (!json.id) {
 			setError(json.data.error);
 		} else {
-			doLogin(json.token);
+			doLogin(json.token, json.fullName);
 			window.location.href = '/';
 		}
 	}
@@ -46,11 +46,11 @@ const Page = () => {
 							onChange={e=>setLastName(e.target.value)}/>
 					</label>
 					<label>
-					<label>
 						Email:
 						<input type="email" placeholder="Digite o seu email" value={email} 
 							onChange={e=>setEmail(e.target.value)}/>
 					</label>
+					<label>
 						Senha:
 						<input type="password" placeholder="Digite a sua senha" value={password} 
 							onChange={e=>setPassword(e.target.value)}/>
