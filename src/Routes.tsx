@@ -4,10 +4,12 @@ import AddLyric from './pages/AddLyric';
 import AllLyrics from './pages/AllLyrics';
 import Edit from './pages/Edit';
 import Delete from './pages/Delete';
+import DeleteUser from './pages/DeleteUser';
 import NotFound from './pages/NotFound';
 import MyAccount from './pages/MyAccount';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import SignUpAdm from './pages/SignUpAdm';
 import PrivateRoute from './components/PrivateRoute';
 const Page = () => {
 	return (
@@ -25,6 +27,11 @@ const Page = () => {
 						<AllLyrics />
 					</PrivateRoute>
 				} />
+				<Route path="/signupadm" element={
+					<PrivateRoute>
+						<SignUpAdm />
+					</PrivateRoute>
+				} />
 				<Route path="/edit/:title" element={
 					<PrivateRoute>
 						<Edit />
@@ -38,6 +45,11 @@ const Page = () => {
 				<Route path="/delete/:id" element={
 					<PrivateRoute>
 						<Delete />
+					</PrivateRoute>
+				} />
+				<Route path="/delete_user/:id" element={
+					<PrivateRoute>
+						<DeleteUser />
 					</PrivateRoute>
 				} />
 				<Route path="*" element={<NotFound />} />

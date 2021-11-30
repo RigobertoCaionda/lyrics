@@ -17,9 +17,13 @@ const Page = () => {
 	let { title } = useParams();
 	useEffect(()=>{
 		 const editLyric = async () => {
-		 	const json = await api.getOne(title as string);//Title pode vir em string ou undefined e como o ts nao sabe se vira qual, entao ele reclama, por isso devemos colocar as string (type assertions)
-		 	 setLoading(false);
-		 	 setLyric([json.data]);
+		 	try {
+		 		const json = await api.getOne(title as string);//Title pode vir em string ou undefined e como o ts nao sabe se vira qual, entao ele reclama, por isso devemos colocar as string (type assertions)
+			 	setLoading(false);
+			 	setLyric([json.data]);
+		 	} catch(error) {
+		 		setError('Falha na requisicao, verifique sua internet!');
+		 	}
 		 }
 		 editLyric();
 		 // eslint-disable-next-line

@@ -16,7 +16,7 @@ const Page = () => {
 		if (!json.data.status) {
 			setError(json.data.error);
 		} else {
-			doLogin(json.data.token, json.data.fullName);
+			doLogin(json.data.token, true);
 			window.location.href = '/';
 		}
 	}

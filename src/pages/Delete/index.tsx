@@ -6,8 +6,12 @@ const Page = () => {
 	let navigate = useNavigate();//Substituiu o useHistory
 	let remItem: boolean = window.confirm("Deseja realmente apagar essa letra?");//No react usa-se window.confirm
 	const remove = async () => {
-			await api.remove(parseInt(id as string));//id pode ser uma string ou undefined, entao vc deve escolher um entre os 2 para colocar no as, depois disso converte-o para inteiro
-			navigate('/lyrics-list');
+			try {
+				await api.remove(parseInt(id as string));//id pode ser uma string ou undefined, entao vc deve escolher um entre os 2 para colocar no as, depois disso converte-o para inteiro
+				navigate('/lyrics-list');
+			} catch(error) {
+				console.log('Falha na requisicao, verifique sua internet');
+			}
 		}
 
 	useEffect(()=>{

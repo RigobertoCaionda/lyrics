@@ -14,6 +14,16 @@ const obj = {
 		const json = await res.json();
 		return json;
 	},
+	getList: async () => {
+		const res = await fetch(BASE+'/users', {
+			method: 'GET',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+		const json = await res.json();
+		return json;
+	},
 	getOne: async (search: string) => {
 		const res = await fetch(BASE+`/lyric/${search}`);
 		const json = await res.json();
@@ -46,6 +56,29 @@ const obj = {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(corpo)
+			});
+			const json = await res.json();
+			return json;
+	},
+	registerAdm: async (name: string, lastName: string, email: string, password: string, 
+		confirmPassword: string, accessLevel: string) => {
+			let corpo = {
+				name,
+				lastName,
+				email,
+				password,
+				confirmPassword,
+				accessLevel
+			};
+
+			const res = await fetch(BASE+'/registerAdm', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
 				},
 				body: JSON.stringify(corpo)
 			});
@@ -90,6 +123,26 @@ const obj = {
 	remove: async (id: number) => {
 		const res = await fetch(BASE+`/delete/${id}`, {
 			method: 'delete',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+		const json = await res.json();
+		return json;
+	},
+	removeUser: async (id: number) => {
+		const res = await fetch(BASE+`/deleteUser/${id}`, {
+			method: 'delete',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+		const json = await res.json();
+		return json;
+	},
+	getLoggedUser: async () => {
+		const res = await fetch(BASE+'/my-account', {
+			method: 'GET',
 			headers: {
 				'Authorization': `Bearer ${token}`
 			}

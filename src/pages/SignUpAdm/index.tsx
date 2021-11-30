@@ -1,8 +1,8 @@
 import * as C from './styled';
 import { useState, FormEvent } from 'react';//Para lidar com o onChange
 import { ErrorMessage } from '../../app.styled';
-import { doLogin } from '../../helpers/AuthHandler';
 import api from '../../api';
+import {useEffect } from 'react';
 const Page = () => {
 	const [name, setName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -11,6 +11,23 @@ const Page = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [accessLevel, setAccessLevel] = useState('');
 	const [error, setError] = useState('');
+	const [access, setAccess] = useState('');
+
+	useEffect(()=>{
+		const getLoggedUser = async () => {
+			try {
+				const json = await api.getLoggedUser();
+				if (json.data.userData) {
+					setAccess(json.data.userData.accessLevel);
+				} else {
+					console.log(json.data.error);
+				}
+			} catch (error: any) {//Recentemente o ts foi atualizado, agora os erros sao do tipo unknown e vc precisa defini-los com any
+				console.log(error.message);
+			}
+		}
+		getLoggedUser();
+	}, []);
 	
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -20,14 +37,17 @@ const Page = () => {
 			return;
 		}
 
-		const json = await api.register(name, lastName, email, password, confirmPassword, accessLevel);
-		if (!json.id) {
-			setError(json.data.error);
-		} else {
-			doLogin(json.token);
-			window.location.href = '/';
+		if (access !== '' && access === 'administrador') {
+				const json = await api.registerAdm(name, lastName, email, password, confirmPassword, accessLevel);
+				if (!json.id) {
+					setError(json.data.error);
+				} else {
+					setError('Cadastro feito com sucesso!');
+				}
+			} else {
+				setError('So os Administradores podem cadastrar aqui!');
+			}
 		}
-	}
 
 	return (
 			<C.Container>
@@ -65,7 +85,7 @@ const Page = () => {
 						<select onChange={e=>setAccessLevel(e.target.value)}>
 							<option value=""></option>
 							<option value="usuario">usuário</option>
-							<option value="administrador" disabled={ true }>Administrador</option>
+							<option value="administrador">Administrador</option>
 						</select>
 					</label>
 
