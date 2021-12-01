@@ -5,6 +5,7 @@ export const Container = styled.div`
 	h2 {
 		text-align: center;
 		margin-bottom: 30px;
+		color: #4c4c4c;
 	}
 	.lyrics-list {
 		display: flex;

@@ -4,6 +4,10 @@ export const Container = styled.div`
 	width: 600px;
 	padding: 50px 0;
 	margin: auto;
+	h1 {
+		text-align: center;
+		color: #4c4c4c;
+	}
 	form {
 		display: flex;
 		flex-direction: column;
@@ -17,7 +21,9 @@ export const Container = styled.div`
 			font-size: 1rem;
 			margin-top: 5px;
 			outline: 0;
-			padding: 5px 0;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
 		}
 		.submitButton {
 			padding: 10px 70px;
@@ -36,6 +42,7 @@ export const Container = styled.div`
 			flex-direction: column;
 			width: 100%;
 			margin-bottom: 10px;
+			color: #4c4c4c;
 		}
 	}
 `;

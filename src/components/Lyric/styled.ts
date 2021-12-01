@@ -8,6 +8,7 @@ export const Container = styled.div`
 	padding-bottom: 20px;
 	.lyric-desc {
 		font-size: 1.3rem;
+		color: #4c4c4c;
 	}
 	a {
 		padding: 10px;

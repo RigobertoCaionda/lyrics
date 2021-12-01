@@ -10,14 +10,18 @@ export const Container = styled.div`
 		align-items: center;
 		select {
 			font-size: 1rem;
-			padding: 5px 0;
+			padding: 8px;
 			outline: 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
 		}
 		input {
 			font-size: 1rem;
 			margin-top: 5px;
 			outline: 0;
-			padding: 5px 0;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
 		}
 		.submitButton {
 			padding: 10px 70px;

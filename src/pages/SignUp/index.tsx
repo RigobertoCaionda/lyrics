@@ -11,12 +11,15 @@ const Page = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [accessLevel, setAccessLevel] = useState('');
 	const [error, setError] = useState('');
+	const [disabled, setDisabled] = useState(false);
 	
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setError('');
+		setDisabled(true);
 		if (password !== confirmPassword) {
 			setError('a senha e o confirmar senha sao diferentes');
+			setDisabled(false);
 			return;
 		}
 
@@ -27,6 +30,7 @@ const Page = () => {
 			doLogin(json.token);
 			window.location.href = '/';
 		}
+		setDisabled(false);
 	}
 
 	return (
@@ -38,38 +42,38 @@ const Page = () => {
 					<label>
 						Nome:
 						<input type="text" placeholder="Digite o seu nome" value={name} 
-							onChange={e=>setName(e.target.value)}/>
+							onChange={e=>setName(e.target.value)} disabled={disabled}/>
 					</label>
 					<label>
 						Sobrenome:
 						<input type="text" placeholder="Digite o seu sobrenome" value={lastName} 
-							onChange={e=>setLastName(e.target.value)}/>
+							onChange={e=>setLastName(e.target.value)} disabled={disabled}/>
 					</label>
 					<label>
 						Email:
 						<input type="email" placeholder="Digite o seu email" value={email} 
-							onChange={e=>setEmail(e.target.value)}/>
+							onChange={e=>setEmail(e.target.value)} disabled={disabled}/>
 					</label>
 					<label>
 						Senha:
 						<input type="password" placeholder="Digite a sua senha" value={password} 
-							onChange={e=>setPassword(e.target.value)}/>
+							onChange={e=>setPassword(e.target.value)} disabled={disabled}/>
 					</label>
 					<label>
 						Confirmar senha:
 						<input type="password" placeholder="Confirme a sua senha" value={confirmPassword} 
-							onChange={e=>setConfirmPassword(e.target.value)}/>
+							onChange={e=>setConfirmPassword(e.target.value)} disabled={disabled}/>
 					</label>
 					<label>
 						Niveis de acesso:
-						<select onChange={e=>setAccessLevel(e.target.value)}>
+						<select onChange={e=>setAccessLevel(e.target.value)} disabled={disabled}>
 							<option value=""></option>
 							<option value="usuario">usuário</option>
 							<option value="administrador" disabled={ true }>Administrador</option>
 						</select>
 					</label>
 
-					<input type="submit" value="Enviar" className="submitButton" />
+					<input type="submit" value="Enviar" className="submitButton" disabled={disabled}/>
 				</form>
 			</C.Container>
 		);

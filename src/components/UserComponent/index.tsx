@@ -6,7 +6,7 @@ type Props = {
 }
 const Page = ({item}: Props) => {
 	return (
-			<Container className="user">
+			<Container>
 				<div className="user-desc">{item.name} {item.lastName}</div>
 					<div className="user-links">
 						<Link to={`/edit_user/${item.id_user}`}>Editar</Link>

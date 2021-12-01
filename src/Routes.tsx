@@ -10,6 +10,7 @@ import MyAccount from './pages/MyAccount';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import SignUpAdm from './pages/SignUpAdm';
+import EditUser from './pages/EditUser';
 import PrivateRoute from './components/PrivateRoute';
 const Page = () => {
 	return (
@@ -35,6 +36,11 @@ const Page = () => {
 				<Route path="/edit/:title" element={
 					<PrivateRoute>
 						<Edit />
+					</PrivateRoute>
+				} />
+				<Route path="/edit_user/:id" element={
+					<PrivateRoute>
+						<EditUser />
 					</PrivateRoute>
 				} />
 				<Route path="/my-account" element={

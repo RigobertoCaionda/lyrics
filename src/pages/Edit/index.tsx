@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';//No react-router-dom v6 useHistory e useNavigate
 import { Song } from '../../types/Song';
 import api from '../../api';
-import { ErrorMessage } from '../../app.styled';
+import { ErrorMessage, SuccessMessage } from '../../app.styled';
 const Page = () => {
 	let navigate = useNavigate();//Em vez de useHistory agora e useNavigate
 	const [lyric, setLyric] = useState<Song[]>([]);
@@ -13,6 +13,7 @@ const Page = () => {
 	const [singer, setSinger] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
 
 	let { title } = useParams();
 	useEffect(()=>{
@@ -22,7 +23,8 @@ const Page = () => {
 			 	setLoading(false);
 			 	setLyric([json.data]);
 		 	} catch(error) {
-		 		setError('Falha na requisicao, verifique sua internet!');
+		 		setError('Falha na requisição, verifique sua internet!');
+		 		setSuccess('');
 		 	}
 		 }
 		 editLyric();
@@ -43,20 +45,24 @@ const Page = () => {
 		e.preventDefault();
 		const json = await api.update(id, songTitle, body, singer);
 		if (!json.data.error) {
-			navigate('/lyrics-list');//E assim que funciona o navigate da versao 6 do react-router-dom
+			setSuccess('Atualização feita com sucesso!');
 			setError('');
 		} else {
 			setError('Falha na atualização!');
+			setSuccess('');
 		}
 
 	}
 
 	return (
 			<Container>
-				<h2>Pagina de edição</h2>
+				<h2>Editar música</h2>
 					<form onSubmit={handleFormSubmit}>
 					{error !== '' &&
 						<ErrorMessage style={{width: '100%'}}>{error}</ErrorMessage>
+					}
+					{success !== '' &&
+						<SuccessMessage style={{width: '100%'}}>{success}</SuccessMessage>
 					}
 						<input type="text" disabled={true} value={id}/>
 						<input type="text" value={songTitle} 

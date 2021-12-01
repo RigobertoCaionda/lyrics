@@ -5,6 +5,7 @@ export const Container = styled.div`
 	justify-content: space-between;
 	border-bottom: 1px solid #000;
 	width: 700px;
+	margin-bottom: 20px;
 	padding-bottom: 20px;
 	.user-desc {
 		font-size: 1.3rem;
@@ -15,6 +16,7 @@ export const Container = styled.div`
 		border-radius: 5px;
 		color: #fff;
 		margin-right: 10px;
+		text-decoration: none;
 	}
 	a: last-child {
 		margin-right: 0;

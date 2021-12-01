@@ -9,6 +9,8 @@ const Page = () => {
 	const [loggedUser, setLoggedUser] = useState('');
 	const [access, setAccess] = useState('');
 	const [list, setList] = useState<User[]>([]);
+	const [loggedUserId, setLoggedUserId] = useState('');
+	const [user, setUser] = useState([]);
 	useEffect(()=>{
 		const getLoggedUser = async () => {
 			try {
@@ -17,6 +19,7 @@ const Page = () => {
 					let fullName: string = `${json.data.userData.name} ${json.data.userData.lastName}`;
 					setLoggedUser(fullName);
 					setAccess(json.data.userData.accessLevel);
+					setLoggedUserId(json.data.userData.id_user);
 				} else {
 					console.log(json.data.error);
 				}
@@ -52,11 +55,11 @@ const Page = () => {
 				<h1>Minha Conta</h1>
 				{loggedUser !== '' &&
 					<div className="fullName">
-						<i>{ loggedUser }</i>
+						Proprietário: <i>{ loggedUser }</i>
 					</div>
 				}
 				{access !== '' &&
-					<div>Permissao: {access}</div>
+					<div className="permission">Permissão: {access}</div>
 				}
 				{access === 'administrador' &&
 					<div className="add_adm">
@@ -65,7 +68,7 @@ const Page = () => {
 				}
 				{access === 'administrador' &&
 					<div className="usersList">
-						<h2>Lista de usuarios</h2>
+						<h2>Lista de usuários</h2>
 						{list.length > 0 &&
 							list.map((item, index)=>(
 									<UserComponent key={index} item={item}/>

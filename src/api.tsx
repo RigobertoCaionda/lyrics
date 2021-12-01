@@ -149,6 +149,38 @@ const obj = {
 		});
 		const json = await res.json();
 		return json;
+	},
+	getOneUser: async (id: string) => {
+		const res = await fetch(BASE+`/user/${id}`, {
+			method: 'GET',
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+		const json = await res.json();
+		return json;
+	},
+		updateUser: async (id: number, name: string, lastName: string, email: string, 
+			password: string, accessLevel: string) => {
+		let corpo = {
+			id,
+			name,
+			lastName,
+			email,
+			password,
+			accessLevel
+		};
+		const res = await fetch(BASE+'/updateUser', {
+			method: 'PUT',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify(corpo)
+		});
+		const json = await res.json();
+		return json;
 	}
 }
 export default obj;

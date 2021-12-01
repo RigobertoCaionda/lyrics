@@ -1,6 +1,6 @@
 import * as C from './styled';
 import { useState, FormEvent } from 'react';//Para lidar com o onChange
-import { ErrorMessage } from '../../app.styled';
+import { ErrorMessage, SuccessMessage } from '../../app.styled';
 import api from '../../api';
 import {useEffect } from 'react';
 const Page = () => {
@@ -11,6 +11,7 @@ const Page = () => {
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [accessLevel, setAccessLevel] = useState('');
 	const [error, setError] = useState('');
+	const [success, setSucess] = useState('');
 	const [access, setAccess] = useState('');
 
 	useEffect(()=>{
@@ -32,8 +33,10 @@ const Page = () => {
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setError('');
+		setSucess('');
 		if (password !== confirmPassword) {
 			setError('a senha e o confirmar senha sao diferentes');
+			setSucess('');
 			return;
 		}
 
@@ -41,11 +44,14 @@ const Page = () => {
 				const json = await api.registerAdm(name, lastName, email, password, confirmPassword, accessLevel);
 				if (!json.id) {
 					setError(json.data.error);
+					setSucess('');
 				} else {
-					setError('Cadastro feito com sucesso!');
+					setSucess('Cadastro feito com sucesso!');
+					setError('');
 				}
 			} else {
 				setError('So os Administradores podem cadastrar aqui!');
+				setSucess('');
 			}
 		}
 
@@ -54,6 +60,9 @@ const Page = () => {
 				<form onSubmit={handleFormSubmit}>
 					{error.length > 0 &&
 						<ErrorMessage style={{width: '100%'}}>{error}</ErrorMessage>
+					}
+					{success.length > 0 &&
+						<SuccessMessage style={{width: '100%'}}>{success}</SuccessMessage>
 					}
 					<label>
 						Nome:

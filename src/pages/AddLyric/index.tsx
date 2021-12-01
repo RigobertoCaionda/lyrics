@@ -2,13 +2,14 @@ import { AddLyricArea } from './styled';
 import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api';
-import { ErrorMessage } from '../../app.styled';
+import { ErrorMessage, SuccessMessage } from '../../app.styled';
 const Page = () => {
 	const navigate = useNavigate();
 	const [title, setTitle] = useState('');
 	const [body, setBody] = useState('');
 	const [singer, setSinger] = useState('');
 	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
 	const [disabled, setDisabled] = useState(false);
 	const [file, setFile] = useState();
 
@@ -20,15 +21,16 @@ const Page = () => {
 		e.preventDefault();
 		setDisabled(true);
 		setError('');
+		setSuccess('');
 		let errors: string[] = [];
 		if (!title.trim()) {
-			errors.push('Sem titulo!');
+			errors.push('Digite um titulo!');
 		}
 		if (!body.trim()) {
-			errors.push('Sem Corpo!');
+			errors.push('Digite a letra da música!');
 		}
 		if (!singer.trim()) {
-			errors.push('Sem nome do cantor!');
+			errors.push('Digite o nome do cantor!');
 		}
 		if (errors.length === 0) {
 			const fData = new FormData();
@@ -39,17 +41,20 @@ const Page = () => {
 		try {
 			const json = await api.insertLyric(fData);
 			if (!json.data.error) {
-				navigate('/lyrics-list');
+				setSuccess('Cadastro feito com sucesso!');
 				setError('');
 			} else {
 				setError(json.data.error);
+				setSuccess('');
 			}
 		} catch(error) {
 			setError('Falha na requisição!');
+			setSuccess('');
 		}
 
 		} else {
 			setError(errors.join("\n"));
+			setSuccess('');
 		}
 		setDisabled(false);
 	}
@@ -58,6 +63,10 @@ const Page = () => {
 				{error !== '' &&
 					<ErrorMessage style={ {width: '100%'} }>{error}</ErrorMessage>
 				}
+				{success !== '' &&
+					<SuccessMessage style={ {width: '100%'} }>{success}</SuccessMessage>
+				}
+				<h2>Cadastrar letra</h2>
 				<form onSubmit={handleFormSubmit }>
 					<label>Título da música</label>
 					<input type="text" placeholder="Digite o título da música" 

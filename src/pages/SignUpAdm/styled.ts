@@ -13,11 +13,13 @@ export const Container = styled.div`
 			padding: 5px 0;
 			outline: 0;
 		}
-		input {
+		input, select {
 			font-size: 1rem;
 			margin-top: 5px;
 			outline: 0;
-			padding: 5px 0;
+			padding: 8px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
 		}
 		.submitButton {
 			padding: 10px 70px;
@@ -36,6 +38,7 @@ export const Container = styled.div`
 			flex-direction: column;
 			width: 100%;
 			margin-bottom: 10px;
+			color: #4c4c4c;
 		}
 	}
 `;

@@ -12,6 +12,7 @@ export const Container = styled.div`
 	}
 	h2 {
 		text-align: center;
+		color: #4c4c4c;
 	}
 	pre {
 		margin-top: 10px;
