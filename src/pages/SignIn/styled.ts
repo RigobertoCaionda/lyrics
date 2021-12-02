@@ -45,4 +45,9 @@ export const Container = styled.div`
 			color: #4c4c4c;
 		}
 	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;

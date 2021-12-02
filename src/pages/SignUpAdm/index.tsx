@@ -3,6 +3,8 @@ import { useState, FormEvent } from 'react';//Para lidar com o onChange
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
 import api from '../../api';
 import {useEffect } from 'react';
+import { doLogout } from '../../helpers/AuthHandler';
+
 const Page = () => {
 	const [name, setName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -44,13 +46,17 @@ const Page = () => {
 				const json = await api.registerAdm(name, lastName, email, password, confirmPassword, accessLevel);
 				if (!json.id) {
 					setError(json.data.error);
+					if (json.data.error === 'Nao autorizado!') {
+						doLogout();
+						window.location.href = '/signin';
+					}
 					setSucess('');
 				} else {
 					setSucess('Cadastro feito com sucesso!');
 					setError('');
 				}
 			} else {
-				setError('So os Administradores podem cadastrar aqui!');
+				setError('Só os Administradores podem cadastrar aqui!');
 				setSucess('');
 			}
 		}

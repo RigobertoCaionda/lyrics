@@ -1,11 +1,11 @@
 import { Container } from './styled';
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';//No react-router-dom v6 useHistory e useNavigate
+import { useParams } from 'react-router-dom';//No react-router-dom v6 useHistory e useNavigate
 import { Song } from '../../types/Song';
 import api from '../../api';
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
+import { doLogout } from '../../helpers/AuthHandler';
 const Page = () => {
-	let navigate = useNavigate();//Em vez de useHistory agora e useNavigate
 	const [lyric, setLyric] = useState<Song[]>([]);
 	const [id, setId] = useState(0);
 	const [songTitle, setSongTitle] = useState('');
@@ -44,6 +44,11 @@ const Page = () => {
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const json = await api.update(id, songTitle, body, singer);
+		if (json.data.error === 'Nao autorizado!') {
+					doLogout();
+					window.location.href = '/signin';
+					return;
+			}
 		if (!json.data.error) {
 			setSuccess('Atualização feita com sucesso!');
 			setError('');

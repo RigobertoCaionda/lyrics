@@ -24,4 +24,9 @@ export const Container = styled.div`
 	a: hover {
 		color: #ccc;
 	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;

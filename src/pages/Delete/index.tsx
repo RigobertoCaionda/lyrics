@@ -7,10 +7,10 @@ const Page = () => {
 	let remItem: boolean = window.confirm("Deseja realmente apagar essa letra?");//No react usa-se window.confirm
 	const remove = async () => {
 			try {
-				await api.remove(parseInt(id as string));//id pode ser uma string ou undefined, entao vc deve escolher um entre os 2 para colocar no as, depois disso converte-o para inteiro
+				const json = await api.remove(parseInt(id as string));//id pode ser uma string ou undefined, entao vc deve escolher um entre os 2 para colocar no as, depois disso converte-o para inteiro
 				navigate('/lyrics-list');
 			} catch(error) {
-				console.log('Falha na requisicao, verifique sua internet');
+				console.log('Falha na requisição, verifique sua internet');
 			}
 		}
 

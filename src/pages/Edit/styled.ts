@@ -38,4 +38,9 @@ export const Container = styled.div`
 			background-color: rgba(0,0,0,.9);
 		}
 	}
+	@media (max-width: 600px) {
+		form {
+			width: 310px;
+		}
+	}
 `;

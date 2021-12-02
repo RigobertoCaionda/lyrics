@@ -5,21 +5,24 @@ import { useEffect, useState } from 'react';
 import { User } from '../../types/User';
 import api from '../../api';
 import UserComponent from '../../components/UserComponent';
+
 const Page = () => {
 	const [loggedUser, setLoggedUser] = useState('');
 	const [access, setAccess] = useState('');
 	const [list, setList] = useState<User[]>([]);
-	const [loggedUserId, setLoggedUserId] = useState('');
-	const [user, setUser] = useState([]);
 	useEffect(()=>{
 		const getLoggedUser = async () => {
 			try {
 				const json = await api.getLoggedUser();
+				if (json.data.error === 'Nao autorizado!') {
+					doLogout();
+					window.location.href = '/signin';//O window atualiza mesmo a pagina, o navigate nao
+					return;
+				}
 				if (json.data.userData) {
 					let fullName: string = `${json.data.userData.name} ${json.data.userData.lastName}`;
 					setLoggedUser(fullName);
 					setAccess(json.data.userData.accessLevel);
-					setLoggedUserId(json.data.userData.id_user);
 				} else {
 					console.log(json.data.error);
 				}

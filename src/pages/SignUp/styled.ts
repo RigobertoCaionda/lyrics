@@ -32,7 +32,8 @@ export const Container = styled.div`
 			border-radius: 5px;
 			background-color: #000;
 			color: #fff;
-		}.submitButton: hover {
+		}
+		.submitButton: hover {
 			background-color: rgba(0,0,0,.9);
 		}
 		label {
@@ -40,6 +41,11 @@ export const Container = styled.div`
 			flex-direction: column;
 			width: 100%;
 			margin-bottom: 10px;
+		}
+	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
 		}
 	}
 `;

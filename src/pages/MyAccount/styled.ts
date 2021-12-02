@@ -53,4 +53,9 @@ export const Container = styled.div`
 			margin-bottom: 60px;
 		}
 	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;

@@ -6,4 +6,9 @@ export const HomeArea = styled.div`
 	align-items: center;
 	flex-direction: column;
 	padding: 70px 0;
+	@media (max-width: 600px) {
+		& {
+			
+		}
+	}
 `;

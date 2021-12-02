@@ -1,12 +1,19 @@
-import { HeaderArea } from './styled';
+import { HeaderArea, MenuArea } from './styled';
 import { Link } from 'react-router-dom';
 import { isLogged } from '../../helpers/AuthHandler';
+import { useState } from 'react';
 const Page = () => {
 	let logged: boolean = isLogged();
+	const [open, setOpen] = useState(false);
+
+	const handleMenuIconClick = () => {
+		setOpen(!open);
+	}
 	return (
 			<HeaderArea>
+				<div className="menuIcon" onClick={handleMenuIconClick}></div>
 				<div className="logoArea"><Link to="/">My Lyrics</Link></div>
-				<div className="menuArea">
+				<MenuArea open={open}>
 					<Link to="/">Home</Link>
 					{logged &&
 						<Link to="/add_lyric">Novo</Link>
@@ -23,7 +30,7 @@ const Page = () => {
 					{logged &&
 						<Link to="/my-account">Minha Conta</Link>
 					}
-				</div>
+				</MenuArea>
 			</HeaderArea>
 		);
 }

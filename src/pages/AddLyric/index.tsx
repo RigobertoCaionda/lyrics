@@ -1,10 +1,10 @@
 import { AddLyricArea } from './styled';
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import api from '../../api';
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
+import { doLogout } from '../../helpers/AuthHandler';
+
 const Page = () => {
-	const navigate = useNavigate();
 	const [title, setTitle] = useState('');
 	const [body, setBody] = useState('');
 	const [singer, setSinger] = useState('');
@@ -40,6 +40,11 @@ const Page = () => {
 			fData.append('avatar', file ? file : '');
 		try {
 			const json = await api.insertLyric(fData);
+			if (json.data.error === 'Nao autorizado!') {
+					doLogout();
+					window.location.href = '/signin';
+					return;
+				}
 			if (!json.data.error) {
 				setSuccess('Cadastro feito com sucesso!');
 				setError('');

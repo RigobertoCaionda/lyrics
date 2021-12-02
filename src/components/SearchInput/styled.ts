@@ -8,4 +8,11 @@ export  const Container = styled.div`
 			border-radius: 5px;
 			outline: 0;
 		}
+		@media (max-width: 600px) {
+			& {
+				input {
+					width: 310px;
+				}
+			}
+		}
 `;

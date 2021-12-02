@@ -20,4 +20,9 @@ export const Container = styled.div`
 		font-weight: 100;
 		text-align: center;
 	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;

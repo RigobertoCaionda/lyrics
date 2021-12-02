@@ -38,4 +38,9 @@ export const AddLyricArea = styled.div`
 	button: hover {
 		background-color: rgba(0,0,0,.9);
 	}
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;

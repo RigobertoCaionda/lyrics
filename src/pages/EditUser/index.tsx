@@ -1,11 +1,11 @@
 import { Container } from './styled';
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { User } from '../../types/User';
 import api from '../../api';
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
+import { doLogout } from '../../helpers/AuthHandler';
 const Page = () => {
-	let navigate = useNavigate();
 	const [user, setUser] = useState<User[]>([]);
 	const [id_user, setId_user] = useState(0);
 	const [name, setName] = useState('');
@@ -51,6 +51,11 @@ const Page = () => {
 		e.preventDefault();
 		if (adm[0].accessLevel === 'administrador') {
 			const json = await api.updateUser(id_user, name, lastName, email, password, accessLevel);
+			if (json.data.error === 'Nao autorizado!') {
+					doLogout();
+					window.location.href = '/signin';
+					return;
+			}
 			if (!json.data.error) {
 				setSuccess('Usuário atualizado com sucesso!');
 				setError('');

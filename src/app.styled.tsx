@@ -6,6 +6,12 @@ export const ErrorMessage = styled.div`
 	color:#000;
 	border:2px solid #ff0000;
 	padding:10px;
+	width: 685px;
+	@media (max-width: 600px) {
+		& {
+			width: 310px;
+		}
+	}
 `;
 
 export const SuccessMessage = styled.div`

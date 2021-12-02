@@ -18,7 +18,7 @@ const Page = () => {
 		setError('');
 		setDisabled(true);
 		if (password !== confirmPassword) {
-			setError('a senha e o confirmar senha sao diferentes');
+			setError('As duas senhas devem ser iguais!');
 			setDisabled(false);
 			return;
 		}

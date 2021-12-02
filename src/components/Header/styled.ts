@@ -7,6 +7,15 @@ export const HeaderArea = styled.header`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	.menuIcon {
+		display: none;
+		width: 40px;
+		height: 40px;
+		background-color: #fff;
+		position: absolute;
+		right: 10px;
+		cursor: pointer;
+	}
 	a {
 		color: #fff;
 		text-decoration: none;
@@ -18,5 +27,35 @@ export const HeaderArea = styled.header`
 	.logoArea {
 		color: #fff;
 		font-size: 1.4rem;
+	}
+	@media (max-width: 600px) {
+		& {
+			padding: 10px 20px;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			min-height: 210px;
+			.menuIcon {
+				display: block;
+				z-index: 2;
+			}
+		}
+	}
+`;
+
+export const MenuArea = styled.div<{open: boolean}>`
+	@media (max-width: 600px) {
+		display: flex;
+			flex-direction: column;
+			width: 100%;
+			background-color: #aaa;
+			margin-top: ${props=> props.open ? '0px' : '-200px'};
+			transition: all ease-in 0.5s;
+			position: absolute;
+			top: 0;
+			left: 0;
+			a {
+				padding: 4px 7px;
+			}
 	}
 `;

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'; 
 import api from '../../api';
 import { ErrorMessage } from '../../app.styled';
+import { doLogout } from '../../helpers/AuthHandler';
 const Page = () => {
 	const [error, setError] = useState('');
 	let { id } = useParams();
@@ -22,6 +23,11 @@ const Page = () => {
 		const getLoggedUser = async () => {
 			try {
 				const json = await api.getLoggedUser();
+				if (json.data.error === 'Nao autorizado!') {
+					doLogout();
+					window.location.href = '/signin';
+					return;
+				}
 				if (json.data.userData) {
 					if (json.data.userData.accessLevel === 'administrador') {
 						removeUser();
@@ -36,9 +42,10 @@ const Page = () => {
 			}
 		}
 		getLoggedUser();
+		// eslint-disable-next-line
 	}, []);
 
-	return error !== '' ? <ErrorMessage style={{ width: '600px', margin: 'auto' }}>{error}</ErrorMessage> : null;
+	return error !== '' ? <ErrorMessage style={{ margin: 'auto' }}>{error}</ErrorMessage> : null;
 }
 
 export default Page;
