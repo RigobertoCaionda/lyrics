@@ -8,6 +8,14 @@ export  const Container = styled.div`
 			border-radius: 5px;
 			outline: 0;
 		}
+		.wrapper {
+			display: flex;
+			align-items: center;
+			.mic {
+				margin-left: -30px;
+				cursor: pointer;
+			}
+		}
 		@media (max-width: 600px) {
 			& {
 				input {

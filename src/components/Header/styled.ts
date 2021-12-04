@@ -9,9 +9,6 @@ export const HeaderArea = styled.header`
 	justify-content: space-between;
 	.menuIcon {
 		display: none;
-		width: 40px;
-		height: 40px;
-		background-color: #fff;
 		position: absolute;
 		right: 10px;
 		cursor: pointer;

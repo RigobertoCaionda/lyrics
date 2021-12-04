@@ -3,22 +3,35 @@ import { useState,KeyboardEvent } from 'react';
 import api from '../../api';
 import {Song } from '../../types/Song';
 import { ErrorMessage } from '../../app.styled';
+import MicIcon from '@material-ui/icons/Mic';
+import { useEffect } from 'react';
 type Props = {
 	setSong: (song: Song[]) => void
 }
 const Page = ({ setSong }: Props) => {
+	let recognition: any = null;
+	let SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+	if (SpeechRecognition !== undefined) {
+		recognition = new SpeechRecognition();
+	}
 	const [search, setSearch] = useState('');
 	const [error, setError] = useState('');
+	const [listening, setListening] = useState(false);
+	const [searchFalse, setSearchFalse] = useState('');
+
 	const getOneSong = async () => {
 			try {
-				const json = await api.getOne(search);
-				if (!json.data.error) {
+				if (search !== '') {
+					const json = await api.getOne(search);
+					if (!json.data.error) {
 					setSong([json.data]);//Tem que estar em array
 					setError('');
 				} else {
-					setSong([]);//Se tiver erro retorno um array vazio para apagar a letra que estava la
+					setSong([]);
 					setError('Letra não encontrada!');
 				}
+				}
+				
 			} catch(error) {
 				setError('Falha na requisição, verifique sua internet!');
 			}
@@ -29,15 +42,51 @@ const Page = ({ setSong }: Props) => {
 			getOneSong();
 			setSearch('');
 		}
-	} 
+	}
+
+	const handleMicClick = () => {
+		if (recognition !== null) {
+			recognition.onstart = () => {
+				setListening(true);
+			}
+			recognition.onend = () => {
+				setListening(false);
+			}
+			recognition.onresult = (e: any) => {
+				const getOneSong = async () => {
+				try {
+					const json = await api.getOne(e.results[0][0].transcript);
+					if (!json.data.error) {
+					setSong([json.data]);//Tem que estar em array
+					setError('');
+					} else {
+						setSong([]);
+						setError('Letra não encontrada!');
+					}
+				
+				} catch(error) {
+					setError('Falha na requisição, verifique sua internet!');
+				}
+		}
+		getOneSong();
+			}
+			recognition.start();
+		}
+	}
+
 	return (
 			<Container>
 					{error !== '' &&
 						<ErrorMessage>{error}</ErrorMessage>
 					}
-					<input type="search" placeholder="Procurar letra de música" value={search} 
-							onChange={e=>setSearch(e.target.value)} 
+					<div className="wrapper">
+						<input type="search" placeholder="Procurar letra de música" 
+						value={search} onChange={e=>setSearch(e.target.value)} 
 							onKeyUp={handleKeyUp}/>
+						<div className="mic" onClick={handleMicClick}>
+							<MicIcon style={{color: listening ? '#126ece' : '#919191'}}/>
+						</div>
+					</div>
 			</Container>
 		)
 }

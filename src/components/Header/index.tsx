@@ -2,6 +2,7 @@ import { HeaderArea, MenuArea } from './styled';
 import { Link } from 'react-router-dom';
 import { isLogged } from '../../helpers/AuthHandler';
 import { useState } from 'react';
+import MenuIcon from '@material-ui/icons/Menu';
 const Page = () => {
 	let logged: boolean = isLogged();
 	const [open, setOpen] = useState(false);
@@ -11,7 +12,9 @@ const Page = () => {
 	}
 	return (
 			<HeaderArea>
-				<div className="menuIcon" onClick={handleMenuIconClick}></div>
+				<div className="menuIcon" onClick={handleMenuIconClick}>
+					<MenuIcon style={{color: '#fff', fontSize: '2.5rem'}}/>
+				</div>
 				<div className="logoArea"><Link to="/">My Lyrics</Link></div>
 				<MenuArea open={open}>
 					<Link to="/">Home</Link>
