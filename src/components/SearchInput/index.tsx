@@ -80,7 +80,7 @@ const Page = ({ setSong }: Props) => {
 						<ErrorMessage>{error}</ErrorMessage>
 					}
 					<div className="wrapper">
-						<input type="search" placeholder="Procurar letra de música" 
+						<input type="text" placeholder="Procurar letra de música" 
 						value={search} onChange={e=>setSearch(e.target.value)} 
 							onKeyUp={handleKeyUp}/>
 						<div className="mic" onClick={handleMicClick}>
