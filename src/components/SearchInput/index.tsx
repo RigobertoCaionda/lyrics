@@ -4,7 +4,7 @@ import api from '../../api';
 import {Song } from '../../types/Song';
 import { ErrorMessage } from '../../app.styled';
 import MicIcon from '@material-ui/icons/Mic';
-import { useEffect } from 'react';
+
 type Props = {
 	setSong: (song: Song[]) => void
 }
@@ -17,7 +17,6 @@ const Page = ({ setSong }: Props) => {
 	const [search, setSearch] = useState('');
 	const [error, setError] = useState('');
 	const [listening, setListening] = useState(false);
-	const [searchFalse, setSearchFalse] = useState('');
 
 	const getOneSong = async () => {
 			try {
@@ -61,7 +60,7 @@ const Page = ({ setSong }: Props) => {
 					setError('');
 					} else {
 						setSong([]);
-						setError('Letra não encontrada!');
+						setError('Letra não encontrada. Procure pronunciar corretamente as palavras!');
 					}
 				
 				} catch(error) {

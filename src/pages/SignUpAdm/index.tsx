@@ -43,17 +43,21 @@ const Page = () => {
 		}
 
 		if (access !== '' && access === 'administrador') {
-				const json = await api.registerAdm(name, lastName, email, password, confirmPassword, accessLevel);
-				if (!json.id) {
-					setError(json.data.error);
-					if (json.data.error === 'Nao autorizado!') {
-						doLogout();
-						window.location.href = '/signin';
+				try {
+					const json = await api.registerAdm(name, lastName, email, password, confirmPassword, accessLevel);
+					if (!json.id) {
+						setError(json.data.error);
+						if (json.data.error === 'Nao autorizado!') {
+							doLogout();
+							window.location.href = '/signin';
+						}
+						setSucess('');
+					} else {
+						setSucess('Cadastro feito com sucesso!');
+						setError('');
 					}
-					setSucess('');
-				} else {
-					setSucess('Cadastro feito com sucesso!');
-					setError('');
+				} catch(error) {
+					setError('Falha na requisição!');
 				}
 			} else {
 				setError('Só os Administradores podem cadastrar aqui!');
@@ -73,7 +77,7 @@ const Page = () => {
 					<label>
 						Nome:
 						<input type="text" placeholder="Digite o seu nome" value={name} 
-							onChange={e=>setName(e.target.value)}/>
+							onChange={e=>setName(e.target.value)} autoFocus/>
 					</label>
 					<label>
 						Sobrenome:

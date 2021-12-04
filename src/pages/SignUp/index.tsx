@@ -23,12 +23,16 @@ const Page = () => {
 			return;
 		}
 
-		const json = await api.register(name, lastName, email, password, confirmPassword, accessLevel);
-		if (!json.id) {
-			setError(json.data.error);
-		} else {
-			doLogin(json.token);
-			window.location.href = '/';
+		try {
+			const json = await api.register(name, lastName, email, password, confirmPassword, accessLevel);
+			if (!json.id) {
+				setError(json.data.error);
+			} else {
+				doLogin(json.token);
+				window.location.href = '/';
+			}
+		} catch(error) {
+			setError('Falha na requisição!');
 		}
 		setDisabled(false);
 	}
@@ -42,7 +46,7 @@ const Page = () => {
 					<label>
 						Nome:
 						<input type="text" placeholder="Digite o seu nome" value={name} 
-							onChange={e=>setName(e.target.value)} disabled={disabled}/>
+							onChange={e=>setName(e.target.value)} disabled={disabled} autoFocus/>
 					</label>
 					<label>
 						Sobrenome:

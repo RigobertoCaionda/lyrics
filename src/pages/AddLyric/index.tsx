@@ -75,7 +75,8 @@ const Page = () => {
 				<form onSubmit={handleFormSubmit }>
 					<label>Título da música</label>
 					<input type="text" placeholder="Digite o título da música" 
-						value={title} onChange={e=>setTitle(e.target.value)} disabled={disabled}/>
+						value={title} onChange={e=>setTitle(e.target.value)} disabled={disabled}
+						autoFocus />
 					<label>Letra</label>
 					<textarea placeholder="Digite a letra da música" value={body} 
 					onChange={(e)=>setBody(e.target.value)} disabled={disabled}></textarea>

@@ -14,12 +14,16 @@ const Page = () => {
 		e.preventDefault();
 		setError('');
 		setDisabled(true);
-		const json = await api.login(email, password);
+		try {
+			const json = await api.login(email, password);
 		if (!json.data.status) {
 			setError(json.data.error);
-		} else {
-			doLogin(json.data.token, keepLogged);
-			window.location.href = '/';
+			} else {
+				doLogin(json.data.token, keepLogged);
+				window.location.href = '/';
+			}
+		} catch(error) {
+			setError('Falha na requisição!');
 		}
 		setDisabled(false);
 	}
@@ -34,7 +38,7 @@ const Page = () => {
 					<label>
 						Email:
 						<input type="email" placeholder="Digite o seu email" value={email} 
-							onChange={e=>setEmail(e.target.value)} disabled={disabled}/>
+							onChange={e=>setEmail(e.target.value)} disabled={disabled} autoFocus/>
 					</label>
 					<label>
 						Senha:
