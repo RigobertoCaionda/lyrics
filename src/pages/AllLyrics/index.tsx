@@ -47,6 +47,9 @@ const Page = () => {
 								<Lyric key={index} item={item}/>
 							))
 					}
+					{list.length === 0 &&
+						<p>Nenhuma música na lista</p>
+					}
 				</div>
 			</Container>
 		);

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-let BASE = 'http://localhost:3001';
+let BASE = 'https://blooming-dawn-10865.herokuapp.com';
 
 let token: string = Cookies.get('token') as string;
 const obj = {
