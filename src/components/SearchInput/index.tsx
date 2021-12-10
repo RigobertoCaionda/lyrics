@@ -21,6 +21,7 @@ const Page = ({ setSong }: Props) => {
 	const getOneSong = async () => {
 			try {
 				if (search !== '') {
+					setSong([]);
 					const json = await api.getOne(search);
 					if (!json.data.error) {
 					setSong([json.data]);//Tem que estar em array
