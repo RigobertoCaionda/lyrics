@@ -7,6 +7,7 @@ export  const Container = styled.div`
 			border: 1px solid #ccc;
 			border-radius: 5px;
 			outline: 0;
+			font-size: 1rem;
 		}
 		.wrapper {
 			display: flex;
