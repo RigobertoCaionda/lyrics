@@ -65,11 +65,11 @@ const Page = () => {
 				setSuccess('Usuário atualizado com sucesso!');
 				setError('');
 			} else {
-				setError('Falha na atualização!');
+				setError(json.data.error);
 				setSuccess('');
 			}
 		} else {
-			setError('So os administradores podem editar usuários aqui!');
+			setError('Só os administradores podem editar usuários aqui!');
 			setSuccess('');
 		}
 		setDisabled(false);
