@@ -11,6 +11,7 @@ const Page = () => {
 	const [songTitle, setSongTitle] = useState('');
 	const [body, setBody] = useState('');
 	const [singer, setSinger] = useState('');
+	// eslint-disable-next-line
 	const [loading, setLoading] = useState(true);
 	const [disabled, setDisabled] = useState(false);
 	const [error, setError] = useState('');

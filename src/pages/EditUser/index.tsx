@@ -13,6 +13,7 @@ const Page = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [accessLevel, setAccessLevel] = useState('');
+	// eslint-disable-next-line
 	const [loading, setLoading] = useState(true);
 	const [disabled, setDisabled] = useState(false);
 	const [error, setError] = useState('');
