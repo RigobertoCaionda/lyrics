@@ -9,9 +9,11 @@ import { doLogout } from '../../helpers/AuthHandler';
 const Page = () => {
 	const [list, setList] = useState<Song[]>([]);
 	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	useEffect(()=>{
 		const getList = async () => {
+			setLoading(true);
 			try {
 				const json = await api.all();
 				if (!json.list) {
@@ -19,6 +21,7 @@ const Page = () => {
 					window.location.href = '/signin';
 					return;
 				}
+				setLoading(false);
 				if (json.userData.accessLevel === 'administrador') {
 					if (json.list) {
 						setList(json.list);//OBS: Nunca retorne so o json, retorne o json.AtributoLaNoBackend
@@ -27,9 +30,10 @@ const Page = () => {
 					}
 				} else {
 					setError('Somente os Administradores podem ter acesso a lista de letras!');
+					setLoading(true);
 				}
 			} catch (error) {
-				setError('Falha na requisicao, verifique a sua internet!');
+				setError('Falha na requisição, verifique a sua internet!');
 			}
 			
 		}
@@ -47,7 +51,7 @@ const Page = () => {
 								<Lyric key={index} item={item}/>
 							))
 					}
-					{list.length === 0 &&
+					{!loading && list.length === 0 &&
 						<p>Nenhuma música na lista</p>
 					}
 				</div>

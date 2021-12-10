@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 export const Container = styled.div`
 	width: 600px;
+	min-height: 72vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

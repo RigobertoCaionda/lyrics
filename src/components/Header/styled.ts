@@ -45,6 +45,7 @@ export const MenuArea = styled.div<{open: boolean}>`
 		display: flex;
 			flex-direction: column;
 			width: 100%;
+			text-align: center;
 			background-color: #aaa;
 			margin-top: ${props=> props.open ? '0px' : '-200px'};
 			transition: all ease-in 0.5s;

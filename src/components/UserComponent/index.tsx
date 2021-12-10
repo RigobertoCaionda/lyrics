@@ -10,7 +10,8 @@ const Page = ({item}: Props) => {
 				<div className="user-desc">{item.name} {item.lastName}</div>
 					<div className="user-links">
 						<Link to={`/edit_user/${item.id_user}`}>Editar</Link>
-						<Link to={`/delete_user/${item.id_user}`}>Excluir</Link>
+						<Link to={ item.email === 'rigobertocaionda98@gmail.com' ? '' : 
+							`/delete_user/${item.id_user}`}>Excluir</Link>
 					</div>
 			</Container>
 		);

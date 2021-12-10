@@ -80,7 +80,7 @@ const Page = () => {
 					</div>
 				}
 				<div className="logout">
-					<button onClick={handleLogout}>Terminar sessao</button>
+					<button onClick={handleLogout}>Terminar sessão</button>
 				</div>
 			</Container>
 		);

@@ -32,6 +32,7 @@ const Page = ({ setSong }: Props) => {
 				}
 				
 			} catch(error) {
+				setSong([]);
 				setError('Falha na requisição, verifique sua internet!');
 			}
 		}

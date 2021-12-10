@@ -14,6 +14,7 @@ const Page = () => {
 	const [password, setPassword] = useState('');
 	const [accessLevel, setAccessLevel] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [disabled, setDisabled] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
 	const [adm, setAdm] = useState<User[]>([]);
@@ -49,6 +50,9 @@ const Page = () => {
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setError('');
+		setSuccess('');
+		setDisabled(true);
 		if (adm[0].accessLevel === 'administrador') {
 			const json = await api.updateUser(id_user, name, lastName, email, password, accessLevel);
 			if (json.data.error === 'Nao autorizado!') {
@@ -67,7 +71,7 @@ const Page = () => {
 			setError('So os administradores podem editar usuários aqui!');
 			setSuccess('');
 		}
-
+		setDisabled(false);
 	}
 
 	return (
@@ -82,19 +86,19 @@ const Page = () => {
 					}
 						<input type="text" disabled={true} value={id}/>
 						<input type="text" value={name} 
-							onChange={e=>setName(e.target.value)} disabled={loading} />
+							onChange={e=>setName(e.target.value)} disabled={disabled} />
 						<input type="text" value={lastName} onChange={e=>setLastName(e.target.value)}
-							disabled={loading} />
+							disabled={disabled} />
 						<input type="email" value={email} onChange={e=>setEmail(e.target.value)}
-							disabled={loading}/>
+							disabled={disabled}/>
 							<input type="text" value={password} onChange={e=>setPassword(e.target.value)}
-							disabled={loading}/>
-							<select onChange={e=>setAccessLevel(e.target.value)}>
+							disabled={disabled}/>
+							<select onChange={e=>setAccessLevel(e.target.value)} disabled={disabled}>
 								<option value=""></option>
 								<option value="usuario">usuário</option>
 								<option value="administrador">Administrador</option>
 						</select>
-						<button disabled={loading}>Atualizar</button>
+						<button disabled={disabled}>Atualizar</button>
 					</form>
 			</Container>
 		);

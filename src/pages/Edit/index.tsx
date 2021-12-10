@@ -12,6 +12,7 @@ const Page = () => {
 	const [body, setBody] = useState('');
 	const [singer, setSinger] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [disabled, setDisabled] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');
 
@@ -43,6 +44,7 @@ const Page = () => {
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setDisabled(true);
 		const json = await api.update(id, songTitle, body, singer);
 		if (json.data.error === 'Nao autorizado!') {
 					doLogout();
@@ -56,7 +58,7 @@ const Page = () => {
 			setError('Falha na atualização!');
 			setSuccess('');
 		}
-
+		setDisabled(false);
 	}
 
 	return (
@@ -71,12 +73,12 @@ const Page = () => {
 					}
 						<input type="text" disabled={true} value={id}/>
 						<input type="text" value={songTitle} 
-							onChange={e=>setSongTitle(e.target.value)} disabled={loading} />
+							onChange={e=>setSongTitle(e.target.value)} disabled={disabled} />
 						<textarea value={body} onChange={e=>setBody(e.target.value)}
-							disabled={loading}></textarea>
+							disabled={disabled}></textarea>
 						<input type="text" value={singer} onChange={e=>setSinger(e.target.value)}
-							disabled={loading}/>
-						<button disabled={loading}>Atualizar</button>
+							disabled={disabled}/>
+						<button disabled={disabled}>Atualizar</button>
 					</form>
 			</Container>
 		);
