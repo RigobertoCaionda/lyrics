@@ -1,9 +1,12 @@
 import { HomeArea } from './styled';
 import SearchInput from '../../components/SearchInput';
 import LyricsComponent from '../../components/LyricsComponent';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Song } from '../../types/Song';
 const Page = () => {
+	useEffect(()=>{
+		document.title = "Lyrics | Home";
+	},[]);
 	const [song, setSong] = useState<Song[]>([]);//Array das musicas achadas
 	return (
 			<HomeArea>

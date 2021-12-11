@@ -11,6 +11,10 @@ const Page = () => {
 	const [access, setAccess] = useState('');
 	const [list, setList] = useState<User[]>([]);
 	useEffect(()=>{
+		document.title = "Lyrics | Minha conta";
+	},[]);
+
+	useEffect(()=>{
 		const getLoggedUser = async () => {
 			try {
 				const json = await api.getLoggedUser();

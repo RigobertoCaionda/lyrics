@@ -12,6 +12,10 @@ const Page = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(()=>{
+		document.title = "Lyrics | Todas";
+	},[]);
+
+	useEffect(()=>{
 		const getList = async () => {
 			setLoading(true);
 			try {

@@ -18,6 +18,11 @@ const Page = () => {
 	const [success, setSuccess] = useState('');
 
 	let { title } = useParams();
+
+	useEffect(()=>{
+		document.title = "Lyrics | Todas | Editar";
+	},[]);
+
 	useEffect(()=>{
 		 const editLyric = async () => {
 		 	try {

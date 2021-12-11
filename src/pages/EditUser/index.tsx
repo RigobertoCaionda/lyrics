@@ -21,6 +21,11 @@ const Page = () => {
 	const [adm, setAdm] = useState<User[]>([]);
 
 	let { id } = useParams();
+
+	useEffect(()=>{
+		document.title = "Lyrics | Minha conta | Editar";
+	},[]);
+
 	useEffect(()=>{
 		 const editUser = async () => {
 		 	try {

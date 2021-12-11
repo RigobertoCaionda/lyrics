@@ -1,8 +1,7 @@
 import * as C from './styled';
-import { useState, FormEvent } from 'react';//Para lidar com o onChange
+import { useState, FormEvent, useEffect } from 'react';//Para lidar com o onChange
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
 import api from '../../api';
-import {useEffect } from 'react';
 import { doLogout } from '../../helpers/AuthHandler';
 
 const Page = () => {
@@ -16,6 +15,10 @@ const Page = () => {
 	const [success, setSucess] = useState('');
 	const [access, setAccess] = useState('');
 	const [disabled, setDisabled] = useState(false);
+
+	useEffect(()=>{
+		document.title = "Lyrics | Minha conta | Cadastrar";
+	},[]);
 
 	useEffect(()=>{
 		const getLoggedUser = async () => {

@@ -42,12 +42,15 @@ export const HeaderArea = styled.header`
 
 export const MenuArea = styled.div<{open: boolean}>`
 	@media (max-width: 600px) {
-		display: flex;
+			display: flex;
 			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 			width: 100%;
+			height: 40%;
 			text-align: center;
 			background-color: #aaa;
-			margin-top: ${props=> props.open ? '0px' : '-200px'};
+			margin-top: ${props=> props.open ? '0px' : '-250px'};
 			transition: all ease-in 0.5s;
 			position: absolute;
 			top: 0;

@@ -1,5 +1,5 @@
 import * as C from './styled';
-import { useState, FormEvent } from 'react';//Para lidar com o onChange
+import { useState, FormEvent, useEffect } from 'react';//Para lidar com o onChange
 import { ErrorMessage } from '../../app.styled';
 import { doLogin } from '../../helpers/AuthHandler';
 import api from '../../api';
@@ -12,6 +12,10 @@ const Page = () => {
 	const [accessLevel, setAccessLevel] = useState('');
 	const [error, setError] = useState('');
 	const [disabled, setDisabled] = useState(false);
+
+	useEffect(() => {
+		document.title = "Lyrics | Cadastrar";
+	},[]);
 	
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

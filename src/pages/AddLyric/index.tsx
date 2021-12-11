@@ -1,5 +1,5 @@
 import { AddLyricArea } from './styled';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import api from '../../api';
 import { ErrorMessage, SuccessMessage } from '../../app.styled';
 import { doLogout } from '../../helpers/AuthHandler';
@@ -13,6 +13,9 @@ const Page = () => {
 	const [disabled, setDisabled] = useState(false);
 	const [file, setFile] = useState();
 
+	useEffect(()=>{
+		document.title = "Lyrics | Nova letra";
+	},[]);
 	const handleInputFileChange = (e: any) => {
 		setFile(e.target.files[0]);
 	}
