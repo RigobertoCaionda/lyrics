@@ -69,9 +69,12 @@ const Page = ({ setSong }: Props) => {
 					setError('Falha na requisição, verifique sua internet!');
 				}
 		}
-		getOneSong();
+				getOneSong();
+				setSearch(e.results[0][0].transcript);
 			}
 			recognition.start();
+		} else {
+			setError('Seu navegador não suporta esta funcionalidade!');
 		}
 	}
 
